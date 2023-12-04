@@ -41,6 +41,7 @@ window.addEventListener("keydown", function(event) {
     }     
 });
 
+
 /* Función  con parámetro*/
 function cargarVehiculo(auto) {
     let boxProductos = document.getElementById("boxProductos");
@@ -135,4 +136,41 @@ boxToggle.addEventListener("click", () => {
         buttonToggle.classList.remove("button-toggle-on");
         buttonToggle.classList.add("button-toggle-off");
     }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    var ratingInput = document.getElementById('ratingInput');
+    var calificarBtn = document.getElementById('calificarBtn');
+    var stars = document.querySelectorAll('.stars i');
+    var inputWrap = document.querySelector('.input-wrap');
+    var btnWrap = document.querySelector('.btn-wrap');
+
+    calificarBtn.addEventListener('click', function () {
+        const ratingValue = parseFloat(ratingInput.value);
+        const fullStars = Math.floor(ratingValue);
+    
+        stars.forEach((star, index) => {
+            star.className = 'fa-regular fa-star';
+    
+            if (index < fullStars) {
+                star.className = 'fa-solid fa-star';
+                // Cambiar el color a dorado
+                star.style.color = 'gold';
+            } else if (index === fullStars) {
+                const remainder = ratingValue - fullStars;
+    
+                if (remainder > 0.2 && remainder <= 0.7) {
+                    star.className = 'fa-solid fa-star-half-stroke';
+                    // Cambiar el color a dorado
+                    star.style.color = 'gold';
+                } else if (remainder > 0.7) {
+                    star.className = 'fa-solid fa-star';
+                    // Cambiar el color a dorado
+                    star.style.color = 'gold';
+                }
+            }
+        });
+        inputWrap.style.display = 'none';
+        btnWrap.style.display = 'none';
+    });
 });
